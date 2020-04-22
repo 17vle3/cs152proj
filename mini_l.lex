@@ -29,6 +29,7 @@ or		printf("OR\n"); currPos += yyleng;
 not		printf("NOT\n"); currPos += yyleng;
 true		printf("TRUE\n"); currPos += yyleng;
 false		printf("FALSE\n"); currPos += yyleng;
+return		printf("RETURN\n"); currPos += yyleng;
 
 "-"		printf("SUB\n"); currPos += yyleng;
 "+"		printf("ADD\n");currPos += yyleng;
