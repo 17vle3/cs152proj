@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
 	yylex();
 	fclose(yyin);
     }
-   
-   yylex();
+   else
+   	yylex();
 }
 
