@@ -10,32 +10,32 @@
 %%
 
 		/*Reserved Keywords*/
-function	{printf("FUNCTION\n");  column += yyleng;}
-beginparams	{printf("BEGIN_PARAMS\n"); column += yyleng;
-endparams	{printf("END_PARAMS\n"); column += yyleng;}
-beginlocals	{printf("BEGIN_LOCALS\n"); column += yyleng;}
-endlocals	{printf("END_LOCALS\n"); column += yyleng;}
-beginbody	{printf("BEGIN_BODY\n"); column += yyleng;}
-endbody		{printf("END_BODY\n"); column += yyleng;}
-integer		{printf("INTEGER\n"); column += yyleng;}
-array		{printf("ARRAY\n"); column += yyleng;}
-of		{printf("OF\n"); column += yyleng;}
-if		{printf("IF\n"); column += yyleng;}
-then		{printf("THEN\n"); column += yyleng;}
-endif		{printf("ENDIF\n"); column += yyleng;}
-else		{printf("ELSE\n"); column += yyleng;}
-while		{printf("WHILE\n"); column += yyleng;}
-do		{printf("DO\n"); column += yyleng;}
-beginloop	{printf("BEGINLOOP\n"); column += yyleng;}
-endloop		{printf("ENDLOOP\n"); column += yyleng;}
-continue	{printf("CONTINUE\n"); column += yyleng;}
-read		{printf("READ\n"); column += yyleng;}
-write		{printf("WRITE\n"); column += yyleng;}
-and		{printf("AND\n"); column += yyleng;}
-or		{printf("OR\n"); column += yyleng;}
-not		{printf("NOT\n"); column += yyleng;}
-true		{printf("TRUE\n"); column += yyleng;}
-false		{printf("FALSE\n"); column += yyleng;}
+function	printf("FUNCTION\n");  column += yyleng;
+beginparams	printf("BEGIN_PARAMS\n"); column += yyleng;
+endparams	printf("END_PARAMS\n"); column += yyleng;
+beginlocals	printf("BEGIN_LOCALS\n"); column += yyleng;
+endlocals	printf("END_LOCALS\n"); column += yyleng;
+beginbody	printf("BEGIN_BODY\n"); column += yyleng;
+endbody		printf("END_BODY\n"); column += yyleng;
+integer		printf("INTEGER\n"); column += yyleng;
+array		printf("ARRAY\n"); column += yyleng;
+of		printf("OF\n"); column += yyleng;
+if		printf("IF\n"); column += yyleng;
+then		printf("THEN\n"); column += yyleng;
+endif		printf("ENDIF\n"); column += yyleng;
+else		printf("ELSE\n"); column += yyleng;
+while		printf("WHILE\n"); column += yyleng;
+do		printf("DO\n"); column += yyleng;
+beginloop	printf("BEGINLOOP\n"); column += yyleng;
+endloop		printf("ENDLOOP\n"); column += yyleng;
+continue	printf("CONTINUE\n"); column += yyleng;
+read		printf("READ\n"); column += yyleng;
+write		printf("WRITE\n"); column += yyleng;
+and		printf("AND\n"); column += yyleng;
+or		printf("OR\n"); column += yyleng;
+not		printf("NOT\n"); column += yyleng;
+true		printf("TRUE\n"); column += yyleng;
+false		printf("FALSE\n"); column += yyleng;
 
 
 		/*Operands*/
