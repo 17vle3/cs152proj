@@ -63,8 +63,8 @@ false		printf("FALSE\n"); column += yyleng;
 [a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); column += yyleng;
 
 [ ]         	column++; 
-[\t]		column++;
-[\n]		row++;	column=1;
+[\t]+		column++;
+"\n"		row++;	column=1;
 
 .		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",row,column,yytext);	exit(0);
 %%
@@ -72,12 +72,15 @@ false		printf("FALSE\n"); column += yyleng;
 
 int main(int argc, char* argv[])
 {
-    if(argc == 2)
-    {
-	yyin = fopen(argv[1],"r");
-	yylex();
-	fclose(yyin);
-    }
-    else
-        yylex();
+    if(argc >= 2){
+      yyin = fopen(argv[1], "r");
+      if(yyin == NULL){
+         yyin = stdin;
+      }
+   }
+   else{
+      yyin = stdin;
+   }
+   
+   yylex();
 }
