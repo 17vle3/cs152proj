@@ -63,7 +63,7 @@ return		printf("RETURN\n"); currPos += yyleng;
 [a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); currPos += yyleng;
 
 [ ]         	currPos++; 
-[\t]+		currPos++;
+[\t]+		cursor_pos += yyleng;
 "\n"		currline++;	currPos=1;
 
 .		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currline,currPos,yytext);	exit(0);
