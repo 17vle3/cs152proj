@@ -70,10 +70,10 @@ false		{printf("FALSE\n"); currPos += yyleng;}
 [\n]		{currLine=currLine+1;currPos=1;}
 
 /*Comments*/
-[##].*		currLine= currLine+1; column=1;
+[##].*		currLine= currLine+1; currPos=1;
 
 /*N/A*/
-.		{printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",row,column,yytext);exit(0);}
+.		{printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currLine,currPos,yytext);exit(0);}
 %%
 
 
