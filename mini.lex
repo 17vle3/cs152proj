@@ -49,10 +49,10 @@ false		{printf("FALSE\n"); currPos += yyleng;}
 		
 /*Identifiers and Numbers*/
 [0-9]+					{printf("NUMBER %s\n",yytext); currPos += yyleng;}
-[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      {printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
-[a-zA-Z][a-zA-Z0-9|_]*[_]               {printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
-[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Multi letter Identifier*/} 
-[a-zA-Z][a-zA-Z0-9]*			{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Single Letter Identifier and Multi letter Identifier with underscores */}
+[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      {printf("Error at currLine %d, currPos %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext); currPos += yyleng; exit(0);} 
+[a-zA-Z][a-zA-Z0-9|_]*[_]               {printf("Error at currLine %d, currPos %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext); currPos += yyleng; exit(0);} 
+[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	{printf("IDENT %s\n", yytext);currPos += yyleng;/*Multi letter Identifier*/} 
+[a-zA-Z][a-zA-Z0-9]*			{printf("IDENT %s\n", yytext);currPos += yyleng;/*Single Letter Identifier and Multi letter Identifier with underscores */}
 
 /*Other Special Symbols*/
 ";"		{printf("SEMICOLON\n"); currPos += yyleng;}
