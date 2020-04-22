@@ -3,11 +3,7 @@
 	int column = 1;
 %}
 
-
-
 %%
-
-		/*Reserved Keywords*/
 function	printf("FUNCTION\n");  column += yyleng;
 beginparams	printf("BEGIN_PARAMS\n"); column += yyleng;
 endparams	printf("END_PARAMS\n"); column += yyleng;
@@ -35,14 +31,11 @@ not		printf("NOT\n"); column += yyleng;
 true		printf("TRUE\n"); column += yyleng;
 false		printf("FALSE\n"); column += yyleng;
 
-
-		/*Operands*/
 "-"		printf("SUB\n"); column += yyleng;
 "+"		printf("ADD\n");column += yyleng;
 "*"		printf("MULT\n");column += yyleng;
 "/"		printf("DIV\n");column += yyleng;
 "%"		printf("MOD\n");column += yyleng;
-
 
 "=="		printf("EQ\n");column += yyleng;
 "<>"		printf("NEQ\n");column += yyleng;
@@ -51,11 +44,7 @@ false		printf("FALSE\n"); column += yyleng;
 "<="		printf("LTE\n");column += yyleng;
 ">="		printf("GTE\n");column += yyleng;
 
-
-		/*Comments*/
 [##].*		row = row + 1; column=1;      
-		
-
 		
 ";"		printf("SEMICOLON\n"); column += yyleng;
 ":"		printf("COLON\n"); column += yyleng;
@@ -66,21 +55,16 @@ false		printf("FALSE\n"); column += yyleng;
 "]"		printf("R_SQUARE_BRACKET\n"); column += yyleng;
 ":="		printf("ASSIGN\n"); column += yyleng;
 
-
-		/*Identifiers and Numbers*/
 [0-9]+					printf("NUMBER %s\n",yytext);   column += yyleng;
 [0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext); column += yyleng; exit(0);
 [a-zA-Z][a-zA-Z0-9|_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column += yyleng;exit(0); 
 [a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	printf("IDENT %s\n", yytext);column += yyleng;
 [a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); column += yyleng;
 
-
-		/*Spaces and Tabs*/
 [ ]         	column++; 
 [\t]		column++;
 [\n]		row++;	column=1;
 
-		/*Unidentified Characters*/
 .		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",row,column,yytext);	exit(0);
 %%
 
