@@ -10,7 +10,7 @@
 %%
 
 		/*Reserved Keywords*/
-function	{printf("FUNCTION\n");column=column+strlen(yytext);}
+function	{printf("FUNCTION\n");  column += yyleng;}
 beginparams	{printf("BEGIN_PARAMS\n");column=column+strlen(yytext);}
 endparams	{printf("END_PARAMS\n");column=column+strlen(yytext);}
 beginlocals	{printf("BEGIN_LOCALS\n");column=column+strlen(yytext);}
