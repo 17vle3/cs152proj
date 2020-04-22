@@ -1,83 +1,92 @@
+%{
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
-%{
-	int currLine = 1, currPos = 1;	
 %}
-	
+
+	int row = 1; 
+	int column = 1;
+
 %%
 
-/*Reserved Words*/
-function	{printf("FUNCTION\n"); currPos += yyleng;}
-beginparams	{printf("BEGIN_PARAMS\n"); currPos += yyleng;}
-endparams	{printf("END_PARAMS\n"); currPos += yyleng;}
-beginlocals	{printf("BEGIN_LOCALS\n"); currPos += yyleng;}
-endlocals	{printf("END_LOCALS\n"); currPos += yyleng;}
-beginbody	{printf("BEGIN_BODY\n"); currPos += yyleng;}
-endbody		{printf("END_BODY\n"); currPos += yyleng;}
-integer		{printf("INTEGER\n"); currPos += yyleng;}
-array		{printf("ARRAY\n"); currPos += yyleng;}
-of		{printf("OF\n"); currPos += yyleng;}
-if		{printf("IF\n"); currPos += yyleng;}
-then		{printf("THEN\n"); currPos += yyleng;}
-endif		{printf("ENDIF\n"); currPos += yyleng;}
-else		{printf("ELSE\n"); currPos += yyleng;}
-while		{printf("WHILE\n"); currPos += yyleng;}
-do		{printf("DO\n"); currPos += yyleng;}
-beginloop	{printf("BEGINLOOP\n"); currPos += yyleng;}
-endloop		{printf("ENDLOOP\n"); currPos += yyleng;}
-continue	{printf("CONTINUE\n"); currPos += yyleng;}
-read		{printf("READ\n"); currPos += yyleng;}
-write		{printf("WRITE\n"); currPos += yyleng;}
-and		{printf("AND\n"); currPos += yyleng;}
-or		{printf("OR\n"); currPos += yyleng;}
-not		{printf("NOT\n"); currPos += yyleng;}
-true		{printf("TRUE\n"); currPos += yyleng;}
-false		{printf("FALSE\n"); currPos += yyleng;}
+		/*Reserved Keywords*/
+function	{printf("FUNCTION\n");column=column+strlen(yytext);}
+beginparams	{printf("BEGIN_PARAMS\n");column=column+strlen(yytext);}
+endparams	{printf("END_PARAMS\n");column=column+strlen(yytext);}
+beginlocals	{printf("BEGIN_LOCALS\n");column=column+strlen(yytext);}
+endlocals	{printf("END_LOCALS\n");column=column+strlen(yytext);}
+beginbody	{printf("BEGIN_BODY\n");column=column+strlen(yytext);}
+endbody		{printf("END_BODY\n");column=column+strlen(yytext);}
+integer		{printf("INTEGER\n");column=column+strlen(yytext);}
+array		{printf("ARRAY\n");column=column+strlen(yytext);}
+of		{printf("OF\n");column=column+strlen(yytext);}
+if		{printf("IF\n");column=column+strlen(yytext);}
+then		{printf("THEN\n");column=column+strlen(yytext);}
+endif		{printf("ENDIF\n");column=column+strlen(yytext);}
+else		{printf("ELSE\n");column=column+strlen(yytext);}
+while		{printf("WHILE\n");column=column+strlen(yytext);}
+do		{printf("DO\n");column=column+strlen(yytext);}
+beginloop	{printf("BEGINLOOP\n");column=column+strlen(yytext);}
+endloop		{printf("ENDLOOP\n");column=column+strlen(yytext);}
+continue	{printf("CONTINUE\n");column=column+strlen(yytext);}
+read		{printf("READ\n");column=column+strlen(yytext);}
+write		{printf("WRITE\n");column=column+strlen(yytext);}
+and		{printf("AND\n");column=column+strlen(yytext);}
+or		{printf("OR\n");column=column+strlen(yytext);}
+not		{printf("NOT\n");column=column+strlen(yytext);}
+true		{printf("TRUE\n");column=column+strlen(yytext);}
+false		{printf("FALSE\n");column=column+strlen(yytext);}
+		/*END of Reserved keywords*/
 
-/*Arithmetic Operators*/
-"-"		{printf("SUB\n"); currPos += yyleng;}
-"+"		{printf("ADD\n"); currPos += yyleng;}
-"*"		{printf("MULT\n"); currPos += yyleng;}
-"/"		{printf("DIV\n"); currPos += yyleng;}
-"%"		{printf("MOD\n"); currPos += yyleng;}
+		/*Operands*/
+"-"		{printf("SUB\n");column=column+strlen(yytext);}
+"+"		{printf("ADD\n");column=column+strlen(yytext);}
+"*"		{printf("MULT\n");column=column+strlen(yytext);}
+"/"		{printf("DIV\n");column=column+strlen(yytext);}
+"%"		{printf("MOD\n");column=column+strlen(yytext);}
 
-/*Comparison Operators*/
-"=="		{printf("EQ\n"); currPos += yyleng;}
-"<>"		{printf("NEQ\n"); currPos += yyleng;}
-"<"		{printf("LT\n"); currPos += yyleng;}
-">"		{printf("GT\n"); currPos += yyleng;}
-"<="		{printf("LTE\n"); currPos += yyleng;}
-">="		{printf("GTE\n"); currPos += yyleng;}
+
+"=="		{printf("EQ\n");column=column+strlen(yytext);}
+"<>"		{printf("NEQ\n");column=column+strlen(yytext);}
+"<"		{printf("LT\n");column=column+strlen(yytext);}
+">"		{printf("GT\n");column=column+strlen(yytext);}
+"<="		{printf("LTE\n");column=column+strlen(yytext);}
+">="		{printf("GTE\n");column=column+strlen(yytext);}
+		/*END of operands*/
+
+
+
+		/*Comments*/
+[##].*		row = row + 1; column=1;/*No need to count columns in comments, As Single line comments can not be followed by any code*/      
 		
-/*Identifiers and Numbers*/
-[0-9]+					{printf("NUMBER %s\n",yytext); currPos += yyleng;}
-[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      {printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",currLine,currPos,yytext); currPos += yyleng; exit(0);} 
-[a-zA-Z][a-zA-Z0-9|_]*[_]               {printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",currLine,currPos,yytext); currPos += yyleng; exit(0);} 
-[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	{printf("IDENT %s\n", yytext);currPos += yyleng;/*Multi letter Identifier*/} 
-[a-zA-Z][a-zA-Z0-9]*			{printf("IDENT %s\n", yytext);currPos += yyleng;/*Single Letter Identifier and Multi letter Identifier with underscores */}
 
-/*Other Special Symbols*/
-";"		{printf("SEMICOLON\n"); currPos += yyleng;}
-":"		{printf("COLON\n"); currPos += yyleng;}
-","		{printf("COMMA\n"); currPos += yyleng;}
-"("		{printf("L_PAREN\n"); currPos += yyleng;}
-")"		{printf("R_PAREN\n"); currPos += yyleng;}
-"["		{printf("L_SQUARE_BRACKET\n"); currPos += yyleng;}
-"]"		{printf("R_SQUARE_BRACKET\n"); currPos += yyleng;}
-":="		{printf("ASSIGN\n"); currPos += yyleng;}
+		
+";"		{printf("SEMICOLON\n");column=column+strlen(yytext);}
+":"		{printf("COLON\n");column=column+strlen(yytext);}
+","		{printf("COMMA\n");column=column+strlen(yytext);}
+"("		{printf("L_PAREN\n");column=column+strlen(yytext);}
+")"		{printf("R_PAREN\n");column=column+strlen(yytext);}
+"["		{printf("L_SQUARE_BRACKET\n");column=column+strlen(yytext);}
+"]"		{printf("R_SQUARE_BRACKET\n");column=column+strlen(yytext);}
+":="		{printf("ASSIGN\n");column=column+strlen(yytext);}
 
-/*White Space*/
-[ ]         	currPos=currPos+1; 
-[\t]		currPos=currPos+1;
-[\n]		{currLine=currLine+1;currPos=1;}
 
-/*Comments*/
-[##].*		currLine= currLine+1; currPos=1;
+		/*Identifiers and Numbers*/
+[0-9]+					{printf("NUMBER %s\n",yytext);column=column+strlen(yytext);}
 
-/*N/A*/
-.		{printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currLine,currPos,yytext);exit(0);}
+[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      {printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
+[a-zA-Z][a-zA-Z0-9|_]*[_]               {printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
+[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Multi letter Identifier*/} 
+[a-zA-Z][a-zA-Z0-9]*			{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Single Letter Identifier and Multi letter Identifier with underscores */}
+
+
+		/*Spaces and Tabs*/
+[ ]         	column=column+1; 
+[\t]		column=column+1;
+[\n]		{row=row+1;column=1;}
+
+		/*Unidentified Characters*/
+.		{printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",row,column,yytext);exit(0);}
 %%
 
 
@@ -89,7 +98,6 @@ int main(int argc, char* argv[])
 	yylex();
 	fclose(yyin);
     }
-   else
-   	yylex();
+    else
+        yylex();
 }
-
