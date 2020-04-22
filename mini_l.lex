@@ -42,7 +42,7 @@ false		printf("FALSE\n"); column += yyleng;
 "-"		{printf("SUB\n"); column += yyleng;}
 "+"		{printf("ADD\n");column += yyleng;}
 "*"		{printf("MULT\n");column += yyleng;}
-"/"		{printf("DIV\n");}
+"/"		{printf("DIV\n");column += yyleng;}
 "%"		{printf("MOD\n");column += yyleng;}
 
 
