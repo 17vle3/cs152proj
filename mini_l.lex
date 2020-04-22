@@ -1,5 +1,5 @@
 %{
-	int row = 1; 
+	int currline = 1;
 	int column = 1;
 %}
 
@@ -45,7 +45,7 @@ false		printf("FALSE\n"); column += yyleng;
 ">="		printf("GTE\n");column += yyleng;
 
 
-[##].*		row = row + 1; column=1;      
+[##].*		currline++; column=1;      
 		
 ";"		printf("SEMICOLON\n"); column += yyleng;
 ":"		printf("COLON\n"); column += yyleng;
@@ -57,16 +57,16 @@ false		printf("FALSE\n"); column += yyleng;
 ":="		printf("ASSIGN\n"); column += yyleng;
 
 [0-9]+					printf("NUMBER %s\n",yytext);   column += yyleng;
-[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext); column += yyleng; exit(0);
-[a-zA-Z][a-zA-Z0-9|_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column += yyleng;exit(0); 
+[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",currline,column,yytext); column += yyleng; exit(0);
+[a-zA-Z][a-zA-Z0-9|_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",currline,column,yytext);column += yyleng;exit(0); 
 [a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	printf("IDENT %s\n", yytext);column += yyleng;
 [a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); column += yyleng;
 
 [ ]         	column++; 
 [\t]+		column++;
-"\n"		row++;	column=1;
+"\n"		currline++;	column=1;
 
-.		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",row,column,yytext);	exit(0);
+.		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currline,column,yytext);	exit(0);
 %%
 
 
