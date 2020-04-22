@@ -9,7 +9,7 @@
 
 %%
 
-		/*Reserved Keywords*/
+/*Reserved Words*/
 function	{printf("FUNCTION\n");column=column+strlen(yytext);}
 beginparams	{printf("BEGIN_PARAMS\n");column=column+strlen(yytext);}
 endparams	{printf("END_PARAMS\n");column=column+strlen(yytext);}
@@ -36,31 +36,30 @@ or		{printf("OR\n");column=column+strlen(yytext);}
 not		{printf("NOT\n");column=column+strlen(yytext);}
 true		{printf("TRUE\n");column=column+strlen(yytext);}
 false		{printf("FALSE\n");column=column+strlen(yytext);}
-		/*END of Reserved keywords*/
 
-		/*Operands*/
+/*Arithmetic Operators*/
 "-"		{printf("SUB\n");column=column+strlen(yytext);}
 "+"		{printf("ADD\n");column=column+strlen(yytext);}
 "*"		{printf("MULT\n");column=column+strlen(yytext);}
 "/"		{printf("DIV\n");column=column+strlen(yytext);}
 "%"		{printf("MOD\n");column=column+strlen(yytext);}
 
-
+/*Comparison Operators*/
 "=="		{printf("EQ\n");column=column+strlen(yytext);}
 "<>"		{printf("NEQ\n");column=column+strlen(yytext);}
 "<"		{printf("LT\n");column=column+strlen(yytext);}
 ">"		{printf("GT\n");column=column+strlen(yytext);}
 "<="		{printf("LTE\n");column=column+strlen(yytext);}
 ">="		{printf("GTE\n");column=column+strlen(yytext);}
-		/*END of operands*/
-
-
-
-		/*Comments*/
-[##].*		row = row + 1; column=1;/*No need to count columns in comments, As Single line comments can not be followed by any code*/      
 		
+/*Identifiers and Numbers*/
+[0-9]+					{printf("NUMBER %s\n",yytext);column=column+strlen(yytext);}
+[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      {printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
+[a-zA-Z][a-zA-Z0-9|_]*[_]               {printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
+[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Multi letter Identifier*/} 
+[a-zA-Z][a-zA-Z0-9]*			{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Single Letter Identifier and Multi letter Identifier with underscores */}
 
-		
+/*Other Special Symbols*/
 ";"		{printf("SEMICOLON\n");column=column+strlen(yytext);}
 ":"		{printf("COLON\n");column=column+strlen(yytext);}
 ","		{printf("COMMA\n");column=column+strlen(yytext);}
@@ -70,22 +69,15 @@ false		{printf("FALSE\n");column=column+strlen(yytext);}
 "]"		{printf("R_SQUARE_BRACKET\n");column=column+strlen(yytext);}
 ":="		{printf("ASSIGN\n");column=column+strlen(yytext);}
 
-
-		/*Identifiers and Numbers*/
-[0-9]+					{printf("NUMBER %s\n",yytext);column=column+strlen(yytext);}
-
-[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      {printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
-[a-zA-Z][a-zA-Z0-9|_]*[_]               {printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column=column+strlen(yytext);exit(0);} 
-[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Multi letter Identifier*/} 
-[a-zA-Z][a-zA-Z0-9]*			{printf("IDENT %s\n", yytext);column=column+strlen(yytext);/*Single Letter Identifier and Multi letter Identifier with underscores */}
-
-
-		/*Spaces and Tabs*/
+/*White Space*/
 [ ]         	column=column+1; 
 [\t]		column=column+1;
 [\n]		{row=row+1;column=1;}
 
-		/*Unidentified Characters*/
+/*Comments*/
+[##].*		row = row + 1; column=1;
+
+/*N/A*/
 .		{printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",row,column,yytext);exit(0);}
 %%
 
