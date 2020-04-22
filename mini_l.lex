@@ -44,11 +44,6 @@ false		printf("FALSE\n"); column += yyleng;
 "<="		printf("LTE\n");column += yyleng;
 ">="		printf("GTE\n");column += yyleng;
 
-[0-9]+					printf("NUMBER %s\n",yytext);   column += yyleng;
-[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext); column += yyleng; exit(0);
-[a-zA-Z][a-zA-Z0-9|_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column += yyleng;exit(0); 
-[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	printf("IDENT %s\n", yytext);column += yyleng;
-[a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); column += yyleng;
 
 [##].*		row = row + 1; column=1;      
 		
@@ -60,6 +55,12 @@ false		printf("FALSE\n"); column += yyleng;
 "["		printf("L_SQUARE_BRACKET\n"); column += yyleng;
 "]"		printf("R_SQUARE_BRACKET\n"); column += yyleng;
 ":="		printf("ASSIGN\n"); column += yyleng;
+
+[0-9]+					printf("NUMBER %s\n",yytext);   column += yyleng;
+[0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",row,column,yytext); column += yyleng; exit(0);
+[a-zA-Z][a-zA-Z0-9|_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",row,column,yytext);column += yyleng;exit(0); 
+[a-zA-Z][a-zA-Z0-9|_]*[a-zA-Z0-9]	printf("IDENT %s\n", yytext);column += yyleng;
+[a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); column += yyleng;
 
 [ ]         	column++; 
 [\t]		column++;
