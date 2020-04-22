@@ -29,6 +29,7 @@ or		printf("OR\n"); currPos += yyleng;
 not		printf("NOT\n"); currPos += yyleng;
 true		printf("TRUE\n"); currPos += yyleng;
 false		printf("FALSE\n"); currPos += yyleng;
+return		printf("RETURN\n"); currPos += yyleng;
 
 "-"		printf("SUB\n"); currPos += yyleng;
 "+"		printf("ADD\n");currPos += yyleng;
@@ -55,7 +56,6 @@ false		printf("FALSE\n"); currPos += yyleng;
 "]"		printf("R_SQUARE_BRACKET\n"); currPos += yyleng;
 ":="		printf("ASSIGN\n"); currPos += yyleng;
 
-return		printf("RETURN\n"); currPos += yyleng;
 [0-9]+					printf("NUMBER %s\n",yytext);   currPos += yyleng;
 [0-9|_][a-zA-Z0-9|_]*[a-zA-Z0-9|_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",currline,currPos,yytext); currPos += yyleng; exit(0);
 [a-zA-Z][a-zA-Z0-9|_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",currline,currPos,yytext);currPos += yyleng;exit(0); 
