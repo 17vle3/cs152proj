@@ -3,7 +3,7 @@
 %}
 
 %%
-return		printf("RETURN\n"); currPos += yyleng;
+"return"		printf("RETURN\n"); currPos += yyleng;
 function	printf("FUNCTION\n");  currPos += yyleng;
 beginparams	printf("BEGIN_PARAMS\n"); currPos += yyleng;
 endparams	printf("END_PARAMS\n"); currPos += yyleng;
