@@ -45,7 +45,7 @@ return		printf("RETURN\n"); currPos += yyleng;
 ">="		printf("GTE\n");currPos += yyleng;
 
 
-[##].*		currline++; currPos=1;      
+[##].*		currLine++; currPos=1;      
 		
 ";"		printf("SEMICOLON\n"); currPos += yyleng;
 ":"		printf("COLON\n"); currPos += yyleng;
@@ -65,7 +65,7 @@ return		printf("RETURN\n"); currPos += yyleng;
 [\t]+		cursor_pos += yyleng;
 "\n"		currline++;	currPos=1;
 
-.		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currline,currPos,yytext);	exit(0);
+.		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currLine,currPos,yytext);	exit(0);
 %%
 
 
