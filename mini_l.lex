@@ -3,64 +3,64 @@
 %}
 
 %%
-function	printf("FUNCTION\n");  currPos += yyleng;
-beginparams	printf("BEGIN_PARAMS\n"); currPos += yyleng;
-endparams	printf("END_PARAMS\n"); currPos += yyleng;
-beginlocals	printf("BEGIN_LOCALS\n"); currPos += yyleng;
-endlocals	printf("END_LOCALS\n"); currPos += yyleng;
-beginbody	printf("BEGIN_BODY\n"); currPos += yyleng;
-endbody		printf("END_BODY\n"); currPos += yyleng;
-integer		printf("INTEGER\n"); currPos += yyleng;
-array		printf("ARRAY\n"); currPos += yyleng;
-of		printf("OF\n"); currPos += yyleng;
-if		printf("IF\n"); currPos += yyleng;
-then		printf("THEN\n"); currPos += yyleng;
-endif		printf("ENDIF\n"); currPos += yyleng;
-else		printf("ELSE\n"); currPos += yyleng;
-while		printf("WHILE\n"); currPos += yyleng;
-do		printf("DO\n"); currPos += yyleng;
-beginloop	printf("BEGINLOOP\n"); currPos += yyleng;
-endloop		printf("ENDLOOP\n"); currPos += yyleng;
-continue	printf("CONTINUE\n"); currPos += yyleng;
-read		printf("READ\n"); currPos += yyleng;
-write		printf("WRITE\n"); currPos += yyleng;
-and		printf("AND\n"); currPos += yyleng;
-or		printf("OR\n"); currPos += yyleng;
-not		printf("NOT\n"); currPos += yyleng;
-true		printf("TRUE\n"); currPos += yyleng;
-false		printf("FALSE\n"); currPos += yyleng;
-return		printf("RETURN\n"); currPos += yyleng;
+function	return FUNCTION; currPos += yyleng;
+beginparams	return BEGINPARAMS; currPos += yyleng;
+endparams	return ENDPARAMS; currPos += yyleng;
+beginlocals	return BEGINLOCALS; currPos += yyleng;
+endlocals	return ENDLOCALS; currPos += yyleng;
+beginbody	return BEGINBODY; currPos += yyleng;
+endbody		return ENDBODY; currPos += yyleng;
+integer		return INTEGER; currPos += yyleng;
+array		return ARRAY; currPos += yyleng;
+of		return OF; currPos += yyleng;
+if		return IF; currPos += yyleng;
+then		return THEN; currPos += yyleng;
+endif		return ENDIF; currPos += yyleng;
+else		return ELSE; currPos += yyleng;
+while		return WHILE; currPos += yyleng;
+do		return DO; currPos += yyleng;
+beginloop	return BEGINLOOP; currPos += yyleng;
+endloop		return ENDLOOP; currPos += yyleng;
+continue	return CONTINUE; currPos += yyleng;
+read		return READ; currPos += yyleng;
+write		return WRITE; currPos += yyleng;
+and		return AND; currPos += yyleng;
+or		return OR; currPos += yyleng;
+not		return NOT; currPos += yyleng;
+true		return TRUE; currPos += yyleng;
+false		return FALSE; currPos += yyleng;
+return		return RETURN; currPos += yyleng;
 
-"-"		printf("SUB\n"); currPos += yyleng;
-"+"		printf("ADD\n");currPos += yyleng;
-"*"		printf("MULT\n");currPos += yyleng;
-"/"		printf("DIV\n");currPos += yyleng;
-"%"		printf("MOD\n");currPos += yyleng;
+"-"		return SUB; currPos += yyleng;
+"+"		return ADD;currPos += yyleng;
+"*"		return MULT;currPos += yyleng;
+"/"		return DIV;currPos += yyleng;
+"%"		return MOD;currPos += yyleng;
 
-"=="		printf("EQ\n");currPos += yyleng;
-"<>"		printf("NEQ\n");currPos += yyleng;
-"<"		printf("LT\n");currPos += yyleng;
-">"		printf("GT\n");currPos += yyleng;
-"<="		printf("LTE\n");currPos += yyleng;
-">="		printf("GTE\n");currPos += yyleng;
+"=="		return EQ;currPos += yyleng;
+"<>"		return NEQ;currPos += yyleng;
+"<"		return LT;currPos += yyleng;
+">"		return GT;currPos += yyleng;
+"<="		return LTE;currPos += yyleng;
+">="		return GTE;currPos += yyleng;
 
 
 [##].*		currLine++; currPos=1;      
 		
-";"		printf("SEMICOLON\n"); currPos += yyleng;
-":"		printf("COLON\n"); currPos += yyleng;
-","		printf("COMMA\n"); currPos += yyleng;
-"("		printf("L_PAREN\n"); currPos += yyleng;
-")"		printf("R_PAREN\n"); currPos += yyleng;
-"["		printf("L_SQUARE_BRACKET\n"); currPos += yyleng;
-"]"		printf("R_SQUARE_BRACKET\n"); currPos += yyleng;
-":="		printf("ASSIGN\n"); currPos += yyleng;
+";"		return SEMICOLON; currPos += yyleng;
+":"		return COLON; currPos += yyleng;
+","		return COMMA; currPos += yyleng;
+"("		return LPAREN; currPos += yyleng;
+")"		return RPAREN; currPos += yyleng;
+"["		return LSQUARE; currPos += yyleng;
+"]"		return R_SQUARE; currPos += yyleng;
+":="		return ASSIGN; currPos += yyleng;
 
-[0-9]+					printf("NUMBER %s\n",yytext);   currPos += yyleng;
+[0-9]+					return NUMBERS;   currPos += yyleng;
 [0-9_][a-zA-Z0-9_]*[a-zA-Z0-9_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",currLine,currPos,yytext); currPos += yyleng; exit(0);
 [a-zA-Z][a-zA-Z0-9_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",currLine,currPos,yytext);currPos += yyleng;exit(0); 
-[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]	printf("IDENT %s\n", yytext);currPos += yyleng;
-[a-zA-Z][a-zA-Z0-9]*			printf("IDENT %s\n", yytext); currPos += yyleng;
+[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]	return IDENTIFIERS;currPos += yyleng;
+[a-zA-Z][a-zA-Z0-9]*			return IDENTIFIERS; currPos += yyleng;
 
 [ ]             currPos += yyleng;
 [\t]+		currPos += yyleng;
