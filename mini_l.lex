@@ -8,6 +8,8 @@ using namespace std;
 #include <string>
 #include <stdlib.h>
 
+#include "tok.h"
+
 	int currLine = 1, currPos = 1;
 %}
 
