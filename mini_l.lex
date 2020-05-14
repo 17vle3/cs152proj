@@ -1,7 +1,4 @@
 %{
-
-#include "tok.h"
-
 	int currLine = 1, currPos = 1;
 %}
 
