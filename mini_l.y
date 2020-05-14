@@ -1,3 +1,4 @@
+%{
 #define YY_NO_UNPUT
 
 using namespace std;
@@ -7,7 +8,6 @@ using namespace std;
 #include <string>
 #include <stdlib.h>
 
-%{
 int yyerror (char* s);
 int yylex (void);
 %}
