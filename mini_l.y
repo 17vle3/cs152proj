@@ -2,7 +2,6 @@
 #include "heading.h"
 
 int yyerror (char* s);
-int yylex (void);
 %}
 
 %union{
@@ -159,17 +158,6 @@ var:            IDENTIFIERS {cout<<"var -> IDENT "<<*($1)<<endl;}
                 | IDENTIFIERS LSQUARE expression RSQUARE {cout<<"var -> IDENT "<<*($1)<<" LSQUARE expression RSQUARE"<<endl;} 
                 ;
 %%
-
-int yyerror(string s)
-{
-  extern int row, column;	// defined and maintained in lex.c
-				//to maintain the row and column
-				//of characters
-  extern char *yytext;		// defined and maintained in lex.c
-  
-  cerr << "SYNTAX(PARSER) Error at line "<<row<<", column "<<column<<" : Unexpected Symbol \""<<yytext<<"\" Encountered."<<endl;
-  exit(1);
-}
 
 int yyerror(char *s)
 {
