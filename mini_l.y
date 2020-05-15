@@ -31,33 +31,33 @@ prog_start:	functions { cout<<"prog_start->functions"<<endl; }
 		;	
 	
 functions:	/*empty*/{cout<<"function->epsilon"<<endl;}
-		| function functions {cout<<"functions -> function functions"<<endl;}
+		| function functions {printf("functions -> function functions\n");}
 		;
 
-function:	FUNCTION IDENTIFIERS SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY {cout<<"FUNCTION IDENT "<<*($2)<<" SEMICOLON BEGIN_PARAMS declarations END_PARAMS BEGIN_LOCALS declarations END_LOCALS BEGIN_BODY statements END_BODY"<<endl;}
+function:	FUNCTION IDENTIFIERS SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY {printf("FUNCTION IDENT "<<*($2)<<" SEMICOLON BEGIN_PARAMS declarations END_PARAMS BEGIN_LOCALS declarations END_LOCALS BEGIN_BODY statements END_BODY\n");}
 		;
 
 
 declarations:	/*empty*/ {cout<<"declarations->epsilon\n"}
-		| declaration SEMICOLON declarations {cout<<"declarations -> declaration SEMICOLON declarations"<<endl;}
+		| declaration SEMICOLON declarations {printf("declarations -> declaration SEMICOLON declarations\n");}
 		;
 
-declaration:	id COLON assign {cout<<"id COLON assign"<<endl;}
+declaration:	id COLON assign {printf("id COLON assign\n";}
 		;
 
 id:		IDENTIFIERS {cout<<"id -> IDENT "<<*($1)<<endl;}
 		| IDENTIFIERS COMMA id {cout<<"id -> IDENT "<<*($1)<<" COMMA id" << endl;}
 		;
 
-assign:		INTEGER {cout<<"assign -> INTEGER"<<endl;}
+assign:		INTEGER {printf("assign -> INTEGER\n");}
 		| ARRAY LSQUARE NUMBERS RSQUARE OF INTEGER {cout<<"assign -> ARRAY LSQUARE NUMBER "<<$3<<" RSQUARE OF INTEGER"<<endl;}
 		;
 
-statements:	statement SEMICOLON statements {cout<<"statements -> statement SEMICOLON statements"<<endl;}
-		| statement SEMICOLON {cout<<"statements -> statement SEMICOLON"<<endl;}
+statements:	statement SEMICOLON statements {printf("statements -> statement SEMICOLON statements\n";}
+		| statement SEMICOLON {printf("statements -> statement SEMICOLON\n");}
 		;
 
-statement:	aa{cout<<"statement -> aa"<<endl;}
+statement:	aa{printf("statement -> aa\n");}
 		| bb{cout<<"statement -> bb"<<endl;}
 		| cc{cout<<"statement -> cc"<<endl;}
 		| dd{cout<<"statement -> dd"<<endl;}
