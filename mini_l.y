@@ -1,6 +1,6 @@
 %{
 #include "heading.h"
-#include <cstring>
+#include <string>
 
 int yyerror (char* s);
 int yylex (void);
