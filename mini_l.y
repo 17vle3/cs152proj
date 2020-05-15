@@ -32,8 +32,8 @@ Program:         %empty
 		 {printf("Program -> Function Program\n");}
 ;
 
-Function:        FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
-{printf("Function -> FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");}
+Function:        FUNCTION idval SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
+{printf("Function -> FUNCTION idval SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");}
 ;
 
 Declaration:     Identifiers COLON INTEGER
@@ -47,10 +47,10 @@ Declarations:    %empty
 		 {printf("Declarations -> Declaration SEMICOLON Declarations\n");}
 ;
 
-Identifiers:     Ident
+Identifiers:     idval
 {printf("Identifiers -> Ident \n");}
-                 | Ident COMMA Identifiers
-		 {printf("Identifiers -> Ident COMMA Identifiers\n");}
+                 | idval COMMA Identifiers
+		 {printf("Identifiers -> idval COMMA Identifiers\n");}
 
 Statements:      Statement SEMICOLON Statements
 {printf("Statements -> Statement SEMICOLON Statements\n");}
@@ -80,10 +80,10 @@ ElseStatement:   %empty
 		 {printf("ElseStatement -> ELSE Statements\n");}
 ;
 
-Var:             Ident LSQUARE Expression RSQUARE
-{printf("Var -> Ident  LSQUARE Expression RSQUARE\n");}
-                 | Ident
-		 {printf("Var -> Ident \n");}
+Var:             idval LSQUARE Expression RSQUARE
+{printf("Var -> idval  LSQUARE Expression RSQUARE\n");}
+                 | idval
+		 {printf("Var -> idval \n");}
 ;
 Vars:            Var
 {printf("Vars -> Var\n");}
@@ -128,8 +128,8 @@ Term:            Var
 		 {printf("Term -> LPAREN Expression RPAREN\n");}
                  | SUB LPAREN Expression RPAREN
 		 {printf("Term -> SUB LPAREN Expression RPAREN\n");}
-                 | Ident LPAREN Expressions RPAREN
-		 {printf("Term -> Ident LPAREN Expressions RPAREN\n");}
+                 | idval LPAREN Expressions RPAREN
+		 {printf("Term -> idval LPAREN Expressions RPAREN\n");}
 ;
 
 BoolExp:         RAExp 
@@ -174,8 +174,8 @@ Comp:            EQ
                  {printf("comp -> GTE\n");}
 ;
 
-Ident:      IDENTIFIERS
-{printf("Ident -> IDENTIFIERS %s \n", $1);}
+idval:      IDENTIFIERS
+{printf("idval -> IDENTIFIERS %s \n", $1);}
 %%
 
 void yyerror(const char *s) {
