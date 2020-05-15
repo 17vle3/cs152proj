@@ -72,6 +72,7 @@ return		return RETURN; currPos += yyleng;
 .		printf("Error at line %d, column %d :unrecognized symbol \"%s\"\n",currLine,currPos,yytext);	exit(0);
 %%
 
+/**
 
 int main(int argc, char* argv[])
 {
@@ -86,4 +87,4 @@ int main(int argc, char* argv[])
    }
    
    yylex();
-}
+}**/
