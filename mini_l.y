@@ -126,12 +126,12 @@ Term:            Var
 		 {printf("Term -> NUMBER %d\n", $1);}
                  | SUB NUMBER
 		 {printf("Term -> SUB NUMBER %d\n", $2);}
-                 | L_PAREN Expression R_PAREN
-		 {printf("Term -> L_PAREN Expression R_PAREN\n");}
-                 | SUB L_PAREN Expression R_PAREN
-		 {printf("Term -> SUB L_PAREN Expression R_PAREN\n");}
-                 | Ident L_PAREN Expressions R_PAREN
-		 {printf("Term -> Ident L_PAREN Expressions R_PAREN\n");}
+                 | LPAREN Expression RPAREN
+		 {printf("Term -> LPAREN Expression RPAREN\n");}
+                 | SUB LPAREN Expression RPAREN
+		 {printf("Term -> SUB LPAREN Expression RPAREN\n");}
+                 | Ident LPAREN Expressions RPAREN
+		 {printf("Term -> Ident LPAREN Expressions RPAREN\n");}
 ;
 
 BoolExp:         RAExp 
@@ -158,8 +158,8 @@ RExp1:           Expression Comp Expression
 		     {printf("relation_exp -> TRUE\n");}
                  | FALSE
 		     {printf("relation_exp -> FALSE\n");}
-                 | L_PAREN BoolExp R_PAREN
-		   {printf("relation_exp -> L_PAREN BoolExp R_PAREN\n");}
+                 | LPAREN BoolExp RPAREN
+		   {printf("relation_exp -> LPAREN BoolExp RPAREN\n");}
 ;
 
 Comp:            EQ
@@ -176,8 +176,8 @@ Comp:            EQ
                  {printf("comp -> GTE\n");}
 ;
 
-Ident:      IDENT
-{printf("Ident -> IDENT %s \n", $1);}
+Ident:      IDENTIFIERS
+{printf("Ident -> IDENTIFIERS %s \n", $1);}
 %%
 
 int yyerror(char *s)
