@@ -179,7 +179,7 @@ Ident:      IDENTIFIERS
 %%
 
 void yyerror(const char *s) {
-   printf("** Line %d, position %d: %s\n", currLine, currPos, msg);
+   printf("** Line %d, position %d: %s\n", currLine, currPos, s);
 }
 
 int main(int argc, char **argv) {
