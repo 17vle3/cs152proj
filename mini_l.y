@@ -47,7 +47,7 @@ Declarations:    %empty
 		 {printf("Declarations -> Declaration SEMICOLON Declarations\n");}
 ;
 
-Identifiers:     idval
+Identifiers:     IDENTIFIERS
 {printf("Identifiers -> Ident \n");}
                  | idval COMMA Identifiers
 		 {printf("Identifiers -> idval COMMA Identifiers\n");}
@@ -175,7 +175,7 @@ Comp:            EQ
 ;
 
 idval:      IDENTIFIERS
-{printf("idval -> IDENTIFIERS %s \n", $2);}
+{printf("idval -> IDENTIFIERS %s \n", $0);}
 %%
 
 void yyerror(const char *s) {
