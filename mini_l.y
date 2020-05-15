@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-int yyerror (char* s);
+void yyerror(const char *s)
  extern int currLine;
  extern int currPos;
  FILE * yyin;
@@ -178,9 +178,8 @@ Ident:      IDENTIFIERS
 {printf("Ident -> IDENTIFIERS %s \n", $1);}
 %%
 
-int yyerror(char *s)
-{
-  return yyerror(string(s));
+void yyerror(const char *s) {
+   printf("** Line %d, position %d: %s\n", currLine, currPos, msg);
 }
 
 int main(int argc, char **argv) {
