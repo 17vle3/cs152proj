@@ -3,10 +3,6 @@
 int yyerror(char *s);
 	int currLine = 1, currPos = 1;
 %}
-%union{
-int val;
-string* op_val;
-}
 
 
 %%
