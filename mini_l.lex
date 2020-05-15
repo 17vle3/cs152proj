@@ -4,7 +4,7 @@ int yyerror(char *s);
 	int currLine = 1, currPos = 1;
 %}
 
-
+   
 %%
 function	return FUNCTION; currPos += yyleng;
 beginparams	return BEGINPARAMS; currPos += yyleng;
