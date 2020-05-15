@@ -1,5 +1,5 @@
 %{
-#include "tok.h"
+#include "y.tab.h"
 int yyerror(char *s);
 	int currLine = 1, currPos = 1;
 %}
