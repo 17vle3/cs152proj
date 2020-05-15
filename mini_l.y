@@ -38,8 +38,8 @@ Function:        FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEG
 
 Declaration:     Identifiers COLON INTEGER
 {printf("Declaration -> Identifiers COLON INTEGER\n");}
-                 | Identifiers COLON ARRAY LSQUARE NUMBER RSQUARE OF INTEGER
-		 {printf("Declaration -> Identifiers COLON ARRAY LSQUARE NUMBER %d RSQUARE  OF INTEGER;\n", $5);}
+                 | Identifiers COLON ARRAY LSQUARE NUMBERS RSQUARE OF INTEGER
+		 {printf("Declaration -> Identifiers COLON ARRAY LSQUARE NUMBERS %d RSQUARE  OF INTEGER;\n", $5);}
 ;
 Declarations:    %empty
 {printf("Declarations -> epsilon\n");}
@@ -120,10 +120,10 @@ Term:            Var
 {printf("Term -> Var\n");}
                  | SUB Var
 		 {printf("Term -> SUB Var\n");}
-                 | NUMBER
-		 {printf("Term -> NUMBER %d\n", $1);}
-                 | SUB NUMBER
-		 {printf("Term -> SUB NUMBER %d\n", $2);}
+                 | NUMBERS
+		 {printf("Term -> NUMBERS %d\n", $1);}
+                 | SUB NUMBERS
+		 {printf("Term -> SUB NUMBERS %d\n", $2);}
                  | LPAREN Expression RPAREN
 		 {printf("Term -> LPAREN Expression RPAREN\n");}
                  | SUB LPAREN Expression RPAREN
