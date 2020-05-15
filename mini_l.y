@@ -17,8 +17,8 @@ char* idval;
 %token  INTEGER ARRAY OF IF THEN ENDIF ELSE WHILE DO BEGINLOOP ENDLOOP 
 %token  CONTINUE READ WRITE TRUE FALSE RETURN 
 %token  SEMICOLON COLON COMMA LPAREN RPAREN LSQUARE RSQUARE 
-%token <val> NUMBERS
-%token <idval> IDENTIFIERS
+%token <val> NUMBER
+%token <idval> IDENT
 %left MULT DIV MOD ADD SUB 
 %left LT LTE GT GTE EQ NEQ
 %right NOT
@@ -32,14 +32,14 @@ Program:         %empty
 		 {printf("Program -> Function Program\n");}
 ;
 
-Function:        FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
-{printf("Function -> FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");}
+Function:        FUNCTION Ident SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+{printf("Function -> FUNCTION Ident SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY\n");}
 ;
 
-Declaration:     IDENTIFIERS COLON INTEGER
+Declaration:     Identifiers COLON INTEGER
 {printf("Declaration -> Identifiers COLON INTEGER\n");}
-                 | IDENTIFIERS COLON ARRAY LSQUARE NUMBERS RSQUARE OF INTEGER
-		 {printf("Declaration -> Identifiers COLON ARRAY LSQUARE NUMBERS %d RSQUARE  OF INTEGER;\n", $5);}
+                 | Identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER R_SQUARE_BRACKET OF INTEGER
+		 {printf("Declaration -> Identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER %d R_SQUARE_BRACKET OF INTEGER;\n", $5);}
 ;
 Declarations:    %empty
 {printf("Declarations -> epsilon\n");}
@@ -65,6 +65,8 @@ Statement:      Var ASSIGN Expression
 		 {printf("Statement -> WHILE BoolExp BEGINLOOP Statements ENDLOOP\n");}
                  | DO BEGINLOOP Statements ENDLOOP WHILE BoolExp
 		 {printf("Statement -> DO BEGINLOOP Statements ENDLOOP WHILE BoolExp\n");}
+                 | FOREACH Ident IN Ident BEGINLOOP Statements ENDLOOP
+		 {printf("Statement -> FOREACH Ident IN Ident BEGINLOOP Statements ENDLOOP\n");}
                  | READ Vars
 		 {printf("Statement -> READ Vars\n");}
                  | WRITE Vars
@@ -80,10 +82,10 @@ ElseStatement:   %empty
 		 {printf("ElseStatement -> ELSE Statements\n");}
 ;
 
-Var:             Ident LSQUARE Expression RSQUARE
-{printf("Var -> idval  LSQUARE Expression RSQUARE\n");}
+Var:             Ident L_SQUARE_BRACKET Expression R_SQUARE_BRACKET
+{printf("Var -> Ident  L_SQUARE_BRACKET Expression R_SQUARE_BRACKET\n");}
                  | Ident
-		 {printf("Var -> idval \n");}
+		 {printf("Var -> Ident \n");}
 ;
 Vars:            Var
 {printf("Vars -> Var\n");}
@@ -120,16 +122,16 @@ Term:            Var
 {printf("Term -> Var\n");}
                  | SUB Var
 		 {printf("Term -> SUB Var\n");}
-                 | NUMBERS
-		 {printf("Term -> NUMBERS %d\n", $1);}
-                 | SUB NUMBERS
-		 {printf("Term -> SUB NUMBERS %d\n", $2);}
-                 | LPAREN Expression RPAREN
-		 {printf("Term -> LPAREN Expression RPAREN\n");}
-                 | SUB LPAREN Expression RPAREN
-		 {printf("Term -> SUB LPAREN Expression RPAREN\n");}
-                 | Ident LPAREN Expressions RPAREN
-		 {printf("Term -> idval LPAREN Expressions RPAREN\n");}
+                 | NUMBER
+		 {printf("Term -> NUMBER %d\n", $1);}
+                 | SUB NUMBER
+		 {printf("Term -> SUB NUMBER %d\n", $2);}
+                 | L_PAREN Expression R_PAREN
+		 {printf("Term -> L_PAREN Expression R_PAREN\n");}
+                 | SUB L_PAREN Expression R_PAREN
+		 {printf("Term -> SUB L_PAREN Expression R_PAREN\n");}
+                 | Ident L_PAREN Expressions R_PAREN
+		 {printf("Term -> Ident L_PAREN Expressions R_PAREN\n");}
 ;
 
 BoolExp:         RAExp 
@@ -156,8 +158,8 @@ RExp1:           Expression Comp Expression
 		     {printf("relation_exp -> TRUE\n");}
                  | FALSE
 		     {printf("relation_exp -> FALSE\n");}
-                 | LPAREN BoolExp RPAREN
-		   {printf("relation_exp -> LPAREN BoolExp RPAREN\n");}
+                 | L_PAREN BoolExp R_PAREN
+		   {printf("relation_exp -> L_PAREN BoolExp R_PAREN\n");}
 ;
 
 Comp:            EQ
@@ -174,8 +176,8 @@ Comp:            EQ
                  {printf("comp -> GTE\n");}
 ;
 
-Ident:      IDENTIFIERS
-{printf("Ident -> IDENTIFIERS %s \n",( $1));}
+Ident:      IDENT
+{printf("Ident -> IDENT %s \n", $1);}
 %%
 
 void yyerror(const char *s) {
