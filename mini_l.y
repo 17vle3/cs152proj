@@ -128,7 +128,7 @@ Term:            Var
 		 {printf("Term -> LPAREN Expression RPAREN\n");}
                  | SUB LPAREN Expression RPAREN
 		 {printf("Term -> SUB LPAREN Expression RPAREN\n");}
-                 | idval LPAREN Expressions RPAREN
+                 | Ident LPAREN Expressions RPAREN
 		 {printf("Term -> idval LPAREN Expressions RPAREN\n");}
 ;
 
