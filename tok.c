@@ -61,16 +61,58 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    MULT = 258,
-    DIV = 259,
-    PLUS = 260,
-    MINUS = 261,
-    EQUAL = 262,
-    L_PAREN = 263,
-    R_PAREN = 264,
-    END = 265,
-    NUMBER = 266,
-    UMINUS = 267
+    FUNCTION = 258,
+    BEGINPARAMS = 259,
+    ENDPARAMS = 260,
+    BEGINLOCALS = 261,
+    ENDLOCALS = 262,
+    BEGINBODY = 263,
+    ENDBODY = 264,
+    INTEGER = 265,
+    ARRAY = 266,
+    OF = 267,
+    IF = 268,
+    THEN = 269,
+    ENDIF = 270,
+    ELSE = 271,
+    WHILE = 272,
+    DO = 273,
+    BEGINLOOP = 274,
+    ENDLOOP = 275,
+    CONTINUE = 276,
+    READ = 277,
+    WRITE = 278,
+    AND = 279,
+OR = 280,
+NOT = 281,
+TRUE = 282,
+FALSE 293,
+RETURN = 294,
+		  
+SUB = 295,
+ADD = 296,
+MULT = 297
+DIV = 298,
+MOD = 299,
+
+EQ = 300,
+NEQ = 301,
+LT = 302,
+GT = 303,
+LTE = 304,
+GTE = 305,
+
+SEMICOLON = 306,
+COLON =307,
+COMMA =308,
+LPAREN =309,
+RPAREN =310,
+LSQUARE =311,
+RSQUARE= 312,
+ASSIGN =313,
+
+NUMBERS =314,
+IDENTIFIERS =315
   };
 #endif
 
