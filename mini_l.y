@@ -36,9 +36,9 @@ Function:        FUNCTION idval SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEG
 {printf("Function -> FUNCTION idval SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");}
 ;
 
-Declaration:     Identifiers COLON INTEGER
+Declaration:     IDENTIFIERS COLON INTEGER
 {printf("Declaration -> Identifiers COLON INTEGER\n");}
-                 | Identifiers COLON ARRAY LSQUARE NUMBERS RSQUARE OF INTEGER
+                 | IDENTIFIERS COLON ARRAY LSQUARE NUMBERS RSQUARE OF INTEGER
 		 {printf("Declaration -> Identifiers COLON ARRAY LSQUARE NUMBERS %d RSQUARE  OF INTEGER;\n", $5);}
 ;
 Declarations:    %empty
@@ -47,10 +47,10 @@ Declarations:    %empty
 		 {printf("Declarations -> Declaration SEMICOLON Declarations\n");}
 ;
 
-Identifiers:     IDENTIFIERS
+Identifiers:     Ident
 {printf("Identifiers -> Ident \n");}
-                 | idval COMMA Identifiers
-		 {printf("Identifiers -> idval COMMA Identifiers\n");}
+                 | Ident COMMA Identifiers
+		 {printf("Identifiers -> Ident COMMA Identifiers\n");}
 
 Statements:      Statement SEMICOLON Statements
 {printf("Statements -> Statement SEMICOLON Statements\n");}
@@ -174,8 +174,8 @@ Comp:            EQ
                  {printf("comp -> GTE\n");}
 ;
 
-idval:      IDENTIFIERS
-{printf("idval -> IDENTIFIERS %s \n",( $1));}
+Ident:      IDENTIFIERS
+{printf("Ident -> IDENTIFIERS %s \n",( $1));}
 %%
 
 void yyerror(const char *s) {
