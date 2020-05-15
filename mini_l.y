@@ -80,9 +80,9 @@ ElseStatement:   %empty
 		 {printf("ElseStatement -> ELSE Statements\n");}
 ;
 
-Var:             idval LSQUARE Expression RSQUARE
+Var:             Ident LSQUARE Expression RSQUARE
 {printf("Var -> idval  LSQUARE Expression RSQUARE\n");}
-                 | idval
+                 | Ident
 		 {printf("Var -> idval \n");}
 ;
 Vars:            Var
