@@ -82,8 +82,8 @@ ElseStatement:   %empty
 		 {printf("ElseStatement -> ELSE Statements\n");}
 ;
 
-Var:             Ident L_SQUARE_BRACKET Expression R_SQUARE_BRACKET
-{printf("Var -> Ident  L_SQUARE_BRACKET Expression R_SQUARE_BRACKET\n");}
+Var:             Ident LSQUARE Expression RSQUARE
+{printf("Var -> Ident  LSQUARE Expression RSQUARE\n");}
                  | Ident
 		 {printf("Var -> Ident \n");}
 ;
