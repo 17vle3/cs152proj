@@ -56,7 +56,7 @@ return		return RETURN; currPos += yyleng;
 "("		return LPAREN; currPos += yyleng;
 ")"		return RPAREN; currPos += yyleng;
 "["		return LSQUARE; currPos += yyleng;
-"]"		return R_SQUARE; currPos += yyleng;
+"]"		return RSQUARE; currPos += yyleng;
 ":="		return ASSIGN; currPos += yyleng;
 
 [0-9]+					return NUMBERS;   currPos += yyleng;
