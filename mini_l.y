@@ -11,8 +11,8 @@ int yyerror (char* s);
 int val;
 char* idval;
 }
-%start	prog_start
 
+%start	prog_start
 %token	FUNCTION BEGINPARAMS ENDPARAMS BEGINLOCALS ENDLOCALS BEGINBODY ENDBODY
 %token  INTEGER ARRAY OF IF THEN ENDIF ELSE WHILE DO BEGINLOOP ENDLOOP 
 %token  CONTINUE READ WRITE TRUE FALSE RETURN 
