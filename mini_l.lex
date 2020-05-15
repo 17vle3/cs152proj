@@ -1,5 +1,6 @@
 %{
-#include "ytab.h"
+#include "heading.h"
+#include "tok.h"
 int yyerror(char *s);
 	int currLine = 1, currPos = 1;
 %}
