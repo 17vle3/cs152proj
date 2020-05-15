@@ -6,9 +6,9 @@ int yyerror(char *s);
 
    
 %%
-function	return FUNCTION; currPos += yyleng;
-beginparams	return BEGINPARAMS; currPos += yyleng;
-endparams	return ENDPARAMS; currPos += yyleng;
+function	currPos += yyleng; return FUNCTION;
+beginparams	currPos += yyleng; return BEGINPARAMS; 
+endparams	currPos += yyleng; return ENDPARAMS; 
 beginlocals	return BEGINLOCALS; currPos += yyleng;
 endlocals	return ENDLOCALS; currPos += yyleng;
 beginbody	return BEGINBODY; currPos += yyleng;
@@ -34,11 +34,11 @@ true		return TRUE; currPos += yyleng;
 false		return FALSE; currPos += yyleng;
 return		return RETURN; currPos += yyleng;
 
-"-"		return SUB; currPos += yyleng;
-"+"		return ADD;currPos += yyleng;
-"*"		return MULT;currPos += yyleng;
-"/"		return DIV;currPos += yyleng;
-"%"		return MOD;currPos += yyleng;
+"-"		currPos += yyleng; return SUB; 
+"+"		currPos += yyleng; return ADD;
+"*"		currPos += yyleng; return MULT; 
+"/"		currPos += yyleng; return DIV;
+"%"		currPos += yyleng; return MOD;
 
 "=="		return EQ;currPos += yyleng;
 "<>"		return NEQ;currPos += yyleng;
@@ -59,11 +59,11 @@ return		return RETURN; currPos += yyleng;
 "]"		return RSQUARE; currPos += yyleng;
 ":="		return ASSIGN; currPos += yyleng;
 
-[0-9]+					   currPos += yyleng; yylval.val = atof(yytext); return NUMBERS;
+[0-9]+					   currPos += yyleng; yylval.val = atof(yytext); return NUMBER;
 [0-9_][a-zA-Z0-9_]*[a-zA-Z0-9_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",currLine,currPos,yytext); currPos += yyleng; exit(0);
 [a-zA-Z][a-zA-Z0-9_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",currLine,currPos,yytext);currPos += yyleng;exit(0); 
-[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]	currPos += yyleng; yylval.idval = yytext; return IDENTIFIERS;
-[a-zA-Z][a-zA-Z0-9]*			 currPos += yyleng; yylval.idval = yytext; return IDENTIFIERS;
+[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]	currPos += yyleng; yylval.idval = yytext; return IDENT;
+[a-zA-Z][a-zA-Z0-9]*			 currPos += yyleng; yylval.idval = yytext; return IDENT;
 
 [ ]             currPos += yyleng;
 [\t]+		currPos += yyleng;
