@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-void yyerror(const char *s)
+void yyerror(const char *s);
  FILE * yyin;
 %}
 
