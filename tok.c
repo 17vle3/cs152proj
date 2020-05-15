@@ -451,9 +451,20 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "MULT", "DIV", "PLUS", "MINUS", "EQUAL",
-  "L_PAREN", "R_PAREN", "END", "NUMBER", "UMINUS", "$accept", "input",
-  "line", "exp", YY_NULLPTR
+  "$end", "error", "$undefined", 
+"FUNCTION", "BEGINPARAMS", "ENDPARAMS", "BEGINLOCALS", "ENDLOCALS",
+"BEGINBODY", "ENDBODY", "INTEGER", "ARRAY", "OF" ,"IF" ,"THEN",
+"ENDIF","ELSE","WHILE","DO","BEGINLOOP","ENDLOOP","CONTINUE",
+"READ","WRITE" ,"AND","OR","NOT","TRUE","FALSE","RETURN"
+		  
+"SUB","ADD","MULT","DIV","MOD",
+
+"EQ","NEQ ","LT","GT","LTE","GTE",
+
+"SEMICOLON","COLON","COMMA","LPAREN","RPAREN","LSQUARE","RSQUARE", "ASSIGN",
+
+"NUMBERS","IDENTIFIERS",
+"$accept", "input", "line", "exp", YY_NULLPTR
 };
 #endif
 
