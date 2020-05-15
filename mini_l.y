@@ -175,7 +175,7 @@ Comp:            EQ
 ;
 
 idval:      IDENTIFIERS
-{printf("idval -> IDENTIFIERS %s \n", $1);}
+{printf("idval -> IDENTIFIERS %s \n", $2);}
 %%
 
 void yyerror(const char *s) {
