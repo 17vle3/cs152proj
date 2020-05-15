@@ -59,11 +59,11 @@ return		return RETURN; currPos += yyleng;
 "]"		return RSQUARE; currPos += yyleng;
 ":="		return ASSIGN; currPos += yyleng;
 
-[0-9]+					return NUMBERS;   currPos += yyleng;
+[0-9]+					   currPos += yyleng; return NUMBERS;
 [0-9_][a-zA-Z0-9_]*[a-zA-Z0-9_]      printf("Error at line %d, column %d: Identifier \"%s\" must begin with a letter\n",currLine,currPos,yytext); currPos += yyleng; exit(0);
 [a-zA-Z][a-zA-Z0-9_]*[_]               printf("Error at line %d, column %d: Identifier \"%s\" cannot end with an underscore\n",currLine,currPos,yytext);currPos += yyleng;exit(0); 
-[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]	return IDENTIFIERS;currPos += yyleng;
-[a-zA-Z][a-zA-Z0-9]*			return IDENTIFIERS; currPos += yyleng;
+[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]	currPos += yyleng; return IDENTIFIERS;
+[a-zA-Z][a-zA-Z0-9]*			 currPos += yyleng; return IDENTIFIERS;
 
 [ ]             currPos += yyleng;
 [\t]+		currPos += yyleng;
