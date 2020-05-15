@@ -7,7 +7,7 @@ int yylex (void);
 
 %union{
 int val;
-string* op_val;
+char* idval;
 }
 %start	prog_start
 
@@ -16,7 +16,7 @@ string* op_val;
 %token  CONTINUE READ WRITE TRUE FALSE RETURN 
 %token  SEMICOLON COLON COMMA LPAREN RPAREN LSQUARE RSQUARE 
 %token <val> NUMBERS
-%token <op_val> IDENTIFIERS
+%token <idval> IDENTIFIERS
 %left MULT DIV MOD ADD SUB 
 %left LT LTE GT GTE EQ NEQ
 %right NOT
