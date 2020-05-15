@@ -65,8 +65,6 @@ Statement:      Var ASSIGN Expression
 		 {printf("Statement -> WHILE BoolExp BEGINLOOP Statements ENDLOOP\n");}
                  | DO BEGINLOOP Statements ENDLOOP WHILE BoolExp
 		 {printf("Statement -> DO BEGINLOOP Statements ENDLOOP WHILE BoolExp\n");}
-                 | FOREACH Ident IN Ident BEGINLOOP Statements ENDLOOP
-		 {printf("Statement -> FOREACH Ident IN Ident BEGINLOOP Statements ENDLOOP\n");}
                  | READ Vars
 		 {printf("Statement -> READ Vars\n");}
                  | WRITE Vars
