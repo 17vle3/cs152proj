@@ -28,7 +28,7 @@ char* idval;
 %%
 Program:         %empty
 {printf("Program -> epsilon\n");}
-                 | Function Program
+                 | Function prog_start
 		 {printf("Program -> Function Program\n");}
 ;
 
