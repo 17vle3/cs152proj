@@ -38,8 +38,8 @@ Function:        FUNCTION Ident SEMICOLON BEGIN_PARAMS Declarations END_PARAMS B
 
 Declaration:     Identifiers COLON INTEGER
 {printf("Declaration -> Identifiers COLON INTEGER\n");}
-                 | Identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER R_SQUARE_BRACKET OF INTEGER
-		 {printf("Declaration -> Identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER %d R_SQUARE_BRACKET OF INTEGER;\n", $5);}
+                 | Identifiers COLON ARRAY LSQUARE NUMBER RSQUARE OF INTEGER
+		 {printf("Declaration -> Identifiers COLON ARRAY LSQUARE NUMBER %d RSQUARE OF INTEGER;\n", $5);}
 ;
 Declarations:    %empty
 {printf("Declarations -> epsilon\n");}
@@ -82,8 +82,8 @@ ElseStatement:   %empty
 		 {printf("ElseStatement -> ELSE Statements\n");}
 ;
 
-Var:             Ident L_SQUARE_BRACKET Expression R_SQUARE_BRACKET
-{printf("Var -> Ident  L_SQUARE_BRACKET Expression R_SQUARE_BRACKET\n");}
+Var:             Ident LSQUARE Expression RSQUARE
+{printf("Var -> Ident  LSQUARE Expression RSQUARE\n");}
                  | Ident
 		 {printf("Var -> Ident \n");}
 ;
@@ -126,12 +126,12 @@ Term:            Var
 		 {printf("Term -> NUMBER %d\n", $1);}
                  | SUB NUMBER
 		 {printf("Term -> SUB NUMBER %d\n", $2);}
-                 | L_PAREN Expression R_PAREN
-		 {printf("Term -> L_PAREN Expression R_PAREN\n");}
-                 | SUB L_PAREN Expression R_PAREN
-		 {printf("Term -> SUB L_PAREN Expression R_PAREN\n");}
-                 | Ident L_PAREN Expressions R_PAREN
-		 {printf("Term -> Ident L_PAREN Expressions R_PAREN\n");}
+                 | LPAREN Expression RPAREN
+		 {printf("Term -> LPAREN Expression RPAREN\n");}
+                 | SUB LPAREN Expression RPAREN
+		 {printf("Term -> SUB LPAREN Expression RPAREN\n");}
+                 | Ident LPAREN Expressions RPAREN
+		 {printf("Term -> Ident LPAREN Expressions RPAREN\n");}
 ;
 
 BoolExp:         RAExp 
@@ -158,8 +158,8 @@ RExp1:           Expression Comp Expression
 		     {printf("relation_exp -> TRUE\n");}
                  | FALSE
 		     {printf("relation_exp -> FALSE\n");}
-                 | L_PAREN BoolExp R_PAREN
-		   {printf("relation_exp -> L_PAREN BoolExp R_PAREN\n");}
+                 | LPAREN BoolExp RPAREN
+		   {printf("relation_exp -> LPAREN BoolExp RPAREN\n");}
 ;
 
 Comp:            EQ
