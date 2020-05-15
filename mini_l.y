@@ -12,7 +12,7 @@ int val;
 char* idval;
 }
 
-%start	prog_start
+%start	Program
 %token	FUNCTION BEGINPARAMS ENDPARAMS BEGINLOCALS ENDLOCALS BEGINBODY ENDBODY
 %token  INTEGER ARRAY OF IF THEN ENDIF ELSE WHILE DO BEGINLOOP ENDLOOP 
 %token  CONTINUE READ WRITE TRUE FALSE RETURN 
@@ -28,7 +28,7 @@ char* idval;
 %%
 Program:         %empty
 {printf("Program -> epsilon\n");}
-                 | Function prog_start
+                 | Function Program
 		 {printf("Program -> Function Program\n");}
 ;
 
