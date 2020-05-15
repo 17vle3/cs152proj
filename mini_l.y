@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 void yyerror(const char *s);
+ extern int currLine;
+ extern int currPos;
  FILE * yyin;
 %}
 
