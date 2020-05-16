@@ -37,6 +37,9 @@ ident:      	 IDENT
 Function:        FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY Statements ENDBODY
 {printf("Function -> FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
 
+declaration:     identifiers INTEGER
+{printf("Syntax error at line %d: invalid declaration\n", currLine);}
+
 declaration:     identifiers COLON INTEGER
 {printf("declaration -> identifiers COLON INTEGER\n");}
                  | identifiers COLON ARRAY LSQUARE NUMBER RSQUARE OF INTEGER
@@ -58,6 +61,9 @@ Statements:      Statement SEMICOLON Statements
                  | Statement SEMICOLON
 		 {printf("Statements -> Statement SEMICOLON\n");}
 ;
+
+Statement:      Var EQUAL Expression
+{printf("Syntax error at line %d: \":=\" expected\n", currLine);}
 
 Statement:      Var EQUAL Expression
 {printf("Syntax error at line %d: \":=\" expected\n", currLine);}
