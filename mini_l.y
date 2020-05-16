@@ -60,7 +60,7 @@ Statements:      Statement SEMICOLON Statements
 ;
 
 Statement:      Var EQUAL Expression
-{printf("Syntax error at line %d: ":=" expected\n", currLine);}
+{printf("Syntax error at line %d: \":=\" expected\n", currLine);}
 
 Statement:      Var ASSIGN Expression
 {printf("Statement -> Var ASSIGN Expression\n");}
