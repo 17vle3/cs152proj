@@ -34,18 +34,18 @@ Program:         %empty
 ident:      	 IDENT
 {printf("ident -> IDENT %s \n", $1);}
 
-Function:        FUNCTION ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
-{printf("Function -> FUNCTION ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
+Function:        FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY Statements ENDBODY
+{printf("Function -> FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
 
-Declaration:     identifiers COLON INTEGER
-{printf("Declaration -> identifiers COLON INTEGER\n");}
+declaration:     identifiers COLON INTEGER
+{printf("declaration -> identifiers COLON INTEGER\n");}
                  | identifiers COLON ARRAY LSQUARE NUMBER RSQUARE OF INTEGER
-		 {printf("Declaration -> identifiers COLON ARRAY LSQUARE NUMBER %d RSQUARE OF INTEGER;\n", $5);}
+		 {printf("declaration -> identifiers COLON ARRAY LSQUARE NUMBER %d RSQUARE OF INTEGER;\n", $5);}
 ;
-Declarations:    %empty
-{printf("Declarations -> epsilon\n");}
-                 | Declaration SEMICOLON Declarations
-		 {printf("Declarations -> Declaration SEMICOLON Declarations\n");}
+declarations:    %empty
+{printf("declarations -> epsilon\n");}
+                 | declaration SEMICOLON declarations
+		 {printf("declarations -> declaration SEMICOLON declarations\n");}
 ;
 
 identifiers:     ident
