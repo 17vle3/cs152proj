@@ -29,12 +29,13 @@ char* idval;
 Program:         %empty
 {printf("Program -> epsilon\n");}
                  | Function Program
-		 {printf("Program -> Function Program\n");}
-;
+		 {printf("Program -> Function Program\n");};
+
+Ident:      	 IDENT
+{printf("Ident -> IDENT %s \n", $1);}
 
 Function:        FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
-{printf("Function -> FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");}
-;
+{printf("Function -> FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
 
 Declaration:     Identifiers COLON INTEGER
 {printf("Declaration -> Identifiers COLON INTEGER\n");}
@@ -174,8 +175,7 @@ Comp:            EQ
                  {printf("comp -> GTE\n");}
 ;
 
-Ident:      IDENT
-{printf("Ident -> IDENT %s \n", $1);}
+
 %%
 
 void yyerror(const char *s) {
