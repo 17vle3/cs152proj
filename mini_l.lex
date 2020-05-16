@@ -9,7 +9,7 @@ int yyerror(char *s);
 function	currPos += yyleng; return FUNCTION;
 beginparams	currPos += yyleng; return BEGINPARAMS; 
 endparams	currPos += yyleng; return ENDPARAMS; 
-beginlocals	return BEGINLOCALS; currPos += yyleng;
+beginlocals	currPos += yyleng; return BEGINLOCALS;
 endlocals	return ENDLOCALS; currPos += yyleng;
 beginbody	return BEGINBODY; currPos += yyleng;
 endbody		return ENDBODY; currPos += yyleng;
