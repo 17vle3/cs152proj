@@ -31,11 +31,11 @@ Program:         %empty
                  | Function Program
 		 {printf("Program -> Function Program\n");};
 
-Ident:      	 IDENT
-{printf("Ident -> IDENT %s \n", $1);}
+ident:      	 IDENT
+{printf("ident -> IDENT %s \n", $1);}
 
-Function:        FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
-{printf("Function -> FUNCTION Ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
+Function:        FUNCTION ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY
+{printf("Function -> FUNCTION ident SEMICOLON BEGINPARAMS Declarations ENDPARAMS BEGINLOCALS Declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
 
 Declaration:     Identifiers COLON INTEGER
 {printf("Declaration -> Identifiers COLON INTEGER\n");}
@@ -48,10 +48,10 @@ Declarations:    %empty
 		 {printf("Declarations -> Declaration SEMICOLON Declarations\n");}
 ;
 
-Identifiers:     Ident
-{printf("Identifiers -> Ident \n");}
-                 | Ident COMMA Identifiers
-		 {printf("Identifiers -> Ident COMMA Identifiers\n");}
+Identifiers:     ident
+{printf("Identifiers -> ident \n");}
+                 | ident COMMA Identifiers
+		 {printf("Identifiers -> ident COMMA Identifiers\n");}
 
 Statements:      Statement SEMICOLON Statements
 {printf("Statements -> Statement SEMICOLON Statements\n");}
@@ -81,10 +81,10 @@ ElseStatement:   %empty
 		 {printf("ElseStatement -> ELSE Statements\n");}
 ;
 
-Var:             Ident LSQUARE Expression RSQUARE
-{printf("Var -> Ident  LSQUARE Expression RSQUARE\n");}
-                 | Ident
-		 {printf("Var -> Ident \n");}
+Var:             ident LSQUARE Expression RSQUARE
+{printf("Var -> ident  LSQUARE Expression RSQUARE\n");}
+                 | ident
+		 {printf("Var -> ident \n");}
 ;
 Vars:            Var
 {printf("Vars -> Var\n");}
@@ -129,8 +129,8 @@ Term:            Var
 		 {printf("Term -> LPAREN Expression RPAREN\n");}
                  | SUB LPAREN Expression RPAREN
 		 {printf("Term -> SUB LPAREN Expression RPAREN\n");}
-                 | Ident LPAREN Expressions RPAREN
-		 {printf("Term -> Ident LPAREN Expressions RPAREN\n");}
+                 | ident LPAREN Expressions RPAREN
+		 {printf("Term -> ident LPAREN Expressions RPAREN\n");}
 ;
 
 BoolExp:         RAExp 
