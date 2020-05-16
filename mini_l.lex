@@ -52,6 +52,7 @@ return		return RETURN; currPos += yyleng;
 		
 ";"		return SEMICOLON; currPos += yyleng;
 ":"		return COLON; currPos += yyleng;
+"="		return EQUAL; currPos += yyleng;
 ","		return COMMA; currPos += yyleng;
 "("		return LPAREN; currPos += yyleng;
 ")"		return RPAREN; currPos += yyleng;
