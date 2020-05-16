@@ -58,6 +58,10 @@ Statements:      Statement SEMICOLON Statements
                  | Statement SEMICOLON
 		 {printf("Statements -> Statement SEMICOLON\n");}
 ;
+
+Statement:      Var = Expression
+{printf("Syntax error at line %d: ":=" expected\n", currLine);}
+
 Statement:      Var ASSIGN Expression
 {printf("Statement -> Var ASSIGN Expression\n");}
                  | IF BoolExp THEN Statements ElseStatement ENDIF
