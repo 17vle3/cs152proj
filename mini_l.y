@@ -38,7 +38,7 @@ Function:        FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEG
 {printf("Function -> FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
 
 declaration:     identifiers INTEGER
-{printf("Syntax error at line %d: invalid declaration\n", currLine);}
+{printf("Syntax error at line %d: invalid declaration\n", currLine); exit(0);}
 
 declaration:     identifiers COLON INTEGER
 {printf("declaration -> identifiers COLON INTEGER\n");}
@@ -63,10 +63,8 @@ Statements:      Statement SEMICOLON Statements
 ;
 
 Statement:      Var EQUAL Expression
-{printf("Syntax error at line %d: \":=\" expected\n", currLine);}
+{printf("Syntax error at line %d: \":=\" expected\n", currLine); exit(0);}
 
-Statement:      Var EQUAL Expression
-{printf("Syntax error at line %d: \":=\" expected\n", currLine);}
 
 Statement:      Var ASSIGN Expression
 {printf("Statement -> Var ASSIGN Expression\n");}
