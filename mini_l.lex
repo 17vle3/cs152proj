@@ -6,7 +6,7 @@ int yyerror(char *s);
 
    
 %%
-function	currPos += yyleng; return FUNCTION;
+function	currPos += yyleng; return FUNCTION; 
 beginparams	currPos += yyleng; return BEGINPARAMS; 
 endparams	currPos += yyleng; return ENDPARAMS; 
 beginlocals	currPos += yyleng; return BEGINLOCALS;
