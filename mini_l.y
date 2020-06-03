@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 void yyerror(const char *s);
+void testerror(const char *s);
+void test2error(const char *s);
  extern int currLine;
  extern int currPos;
  FILE * yyin;
@@ -189,7 +191,12 @@ Comp:            EQ
 void yyerror(const char *s) {
    printf("** Line %d, position %d: %s\n", currLine, currPos, s);
 }
-
+void testerror(const char *s) {
+   printf("Syntax error at line %d: \":=\" expected\n", currLine); exit(1);
+}
+void test2error(const char *s) {
+   printf("Syntax error at line %d: invalid declaration\n", currLine); exit(1);
+}
 int main(int argc, char **argv) {
    if (argc > 1) {
       yyin = fopen(argv[1], "r");
