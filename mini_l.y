@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 void yyerror(const char *s);
-void testerror(const char *s);
-void test2error(const char *s);
  extern int currLine;
  extern int currPos;
  FILE * yyin;
@@ -40,7 +38,7 @@ Function:        FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEG
 {printf("Function -> FUNCTION ident SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY Statements ENDBODY\n");};
 
 declaration:     identifiers INTEGER
-{printf("Syntax error at line %d: invalid declaration\n", currLine); exit(1);}
+{yyerror("invalid declaration"); }
 
 declaration:     identifiers COLON INTEGER
 {printf("declaration -> identifiers COLON INTEGER\n");}
@@ -65,7 +63,7 @@ Statements:      Statement SEMICOLON Statements
 ;
 
 Statement:      Var EQUAL Expression
-{printf("Syntax error at line %d: \":=\" expected\n", currLine); exit(1);}
+{yyerror("\":=\" expected");}
 
 
 Statement:      Var ASSIGN Expression
@@ -191,12 +189,6 @@ Comp:            EQ
 void yyerror(const char *s) {
    printf("** Line %d, position %d: %s\n", currLine, currPos, s);
    exit(1);
-}
-void testerror(const char *s) {
-   printf("Syntax error at line %d: \":=\" expected\n", currLine); exit(1);
-}
-void test2error(const char *s) {
-   printf("Syntax error at line %d: invalid declaration\n", currLine); exit(1);
 }
 int main(int argc, char **argv) {
    if (argc > 1) {
