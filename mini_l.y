@@ -190,6 +190,7 @@ Comp:            EQ
 
 void yyerror(const char *s) {
    printf("** Line %d, position %d: %s\n", currLine, currPos, s);
+   exit(1);
 }
 void testerror(const char *s) {
    printf("Syntax error at line %d: \":=\" expected\n", currLine); exit(1);
